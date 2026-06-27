@@ -337,15 +337,9 @@ class RendezVousViewSet(viewsets.ModelViewSet):
 
         return RendezVous.objects.none()
 
+
     @action(detail=True, methods=['post'])
     def confirmer(self, request, pk=None):
-
-        # Vérifier que seulement le médecin peut confirmer
-        if request.user.role != "medecin":
-            return Response(
-                {"error": "Action interdite"},
-                status=403
-            )
 
         rendezvous = self.get_object()
 
@@ -364,13 +358,6 @@ class RendezVousViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['post'])
     def annuler(self, request, pk=None):
-
-        # Vérifier que seulement le médecin peut annuler
-        if request.user.role != "medecin":
-            return Response(
-                {"error": "Action interdite"},
-                status=403
-            )
 
         rendezvous = self.get_object()
 
